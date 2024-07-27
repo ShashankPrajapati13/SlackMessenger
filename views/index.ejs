@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Slack Messenger</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'>
+</head>
+<body>
+    <% if (query.success === 'true') { %>
+        <p id="feedbackMessage" style="color: green;">Message sent successfully!</p>
+    <% } else if (query.success === 'false') { %>
+        <p id="feedbackMessage" style="color: red;">Failed to send message: <%= query.error %></p>
+    <% } %>
+    <form action="/send" method="post">
+        <label for="channel">Channel ID:</label>
+        <input type="text" id="channel" name="channel" value="C07F0SQQDB2" readonly required>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" required></textarea>
+        <button type="submit">Send Message</button>
+    </form>
+
+    <script>
+        window.onload = function() {
+            var feedbackMessage = document.getElementById('feedbackMessage');
+            if (feedbackMessage) {
+                setTimeout(function() {
+                    feedbackMessage.style.display = 'none';
+                }, 5000);
+            }
+        };
+    </script>
+</body>
+</html>
